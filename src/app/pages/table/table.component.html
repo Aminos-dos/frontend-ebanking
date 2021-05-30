@@ -1,0 +1,130 @@
+<div class="row" id='main-container'>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Mes agents :</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Nom
+              </th>
+              <th>
+                Prenom
+              </th>
+              <th>
+                CIN
+              </th>
+              <th>
+                Address
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                Telephone
+              </th>
+              <th>
+                Agence
+              </th>
+              <th>
+                Admin
+              </th>
+              <th>
+               
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let agent of agents">
+                <td>{{ agent.nom }}</td>
+                <td>{{ agent.prenom }}</td>
+                <td>{{ agent.cin }}</td>
+                <td>{{ agent.adresse }}</td>
+                <td>{{ agent.email }}</td>
+                <td>{{ agent.telephone }}</td>
+                <td>{{ agent.agence.nom }}</td>
+                <td>{{ agent.creationAdmin.nom }} {{agent.creationAdmin.prenom}}</td>
+                <button (click)="onOpenModal(agent,'edit')" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                <button (click)="onOpenModal(agent,'delete')" class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- edit Modal -->
+<div class="modal fade" id="updateAgentModal" tabindex="-1" role="dialog" aria-labelledby="agentEditModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Agent </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+              <div class="form-group">
+                 <label for="name">Nom et Prenom :</label>
+                 <input type="text" ngModel="test" name="nom" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+              </div>
+              <input type="hidden" ngModel="{{updatedAgent?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+              <div class="form-group">
+                 <label for="email">Email :</label>
+                 <input type="email" ngModel="{{updatedAgent?.email}}" [(ngModel)]="emailT" name="prenom" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Cin:</label>
+                 <input type="text" ngModel="{{updatedAgent?.cin}}" name="cin" class="form-control" id="jobTitle" placeholder="CIN">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Address :</label>
+                 <input type="text" ngModel="{{updateAgent?.adresse}}" name="adresse" class="form-control" id="phone" name="phone" placeholder="Address">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Telephone :</label>
+                 <input type="text" ngModel="{{updatedAgent?.telephone}}" name="telephone" class="form-control" id="imageUrl" placeholder="Phone">
+              </div>
+              <div class="form-group">
+                <label for="phone">Agence :</label>
+                <input type="text" ngModel="{{updatedAgent?.agence.nom}}" name="agence.nom" class="form-control" id="imageUrl" placeholder="Agence">
+             </div>
+             <div class="form-group">
+              <label for="phone">Admin :</label>
+              <input type="text" ngModel="{{updatedAgent?.creationAdmin.cin}}" [(ngModel)]="creationAdminId" name="creationAdmin.cin" class="form-control" id="imageUrl" placeholder="Agent CIN">
+           </div>
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="updateAgent(editForm,creationAdminId)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+<!-- Delete modal -->
+<div class="modal fade" id="deleteAgentModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete Agent</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete agent </p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button  class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+</div>
